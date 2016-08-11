@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Promisify-call by bojand</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Promisify-call</h1>
+        <p>Promisify a function call so users can call a function with a callback or get a promise</p>
+
+        <p class="view"><a href="https://github.com/bojand/promisify-call">View the Project on GitHub <small>bojand/promisify-call</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/bojand/promisify-call/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/bojand/promisify-call/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/bojand/promisify-call">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="promisify-call" class="anchor" href="#promisify-call" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>promisify-call</h1>
+
+<p>Promisify a function call so users can call a function with a callback or get a promise.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><code>npm install promisify-call</code></p>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">function</span> <span class="pl-en">_uppercase</span>(<span class="pl-smi">param</span>, <span class="pl-smi">fn</span>) {
+  <span class="pl-c1">setTimeout</span>(() <span class="pl-k">=&gt;</span> {
+    <span class="pl-k">return</span> <span class="pl-en">fn</span>(<span class="pl-c1">null</span>, <span class="pl-smi">param</span>.<span class="pl-c1">toUpperCase</span>());
+  }, <span class="pl-c1">50</span>);
+}
+
+<span class="pl-k">function</span> <span class="pl-en">uppercase</span>(<span class="pl-smi">param</span>, <span class="pl-smi">fn</span>) {
+  <span class="pl-k">return</span> <span class="pl-en">promisifyCall</span>(<span class="pl-v">this</span>, _uppercase, <span class="pl-k">...</span>arguments);
+}
+
+<span class="pl-c">// now we can call it using callback-style</span>
+<span class="pl-en">uppercase</span>(<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>, (<span class="pl-smi">err</span>, <span class="pl-smi">res</span>) <span class="pl-k">=&gt;</span> {
+  <span class="pl-en">console</span>.<span class="pl-c1">log</span>(res); <span class="pl-c">// FOO</span>
+});
+
+<span class="pl-c">// OR promise style</span>
+<span class="pl-k">const</span> <span class="pl-c1">res</span> <span class="pl-k">=</span> <span class="pl-k">await</span> <span class="pl-en">uppercase</span>(<span class="pl-s"><span class="pl-pds">'</span>foo<span class="pl-pds">'</span></span>);
+<span class="pl-en">console</span>.<span class="pl-c1">log</span>(res); <span class="pl-c">// FOO</span></pre></div>
+
+<h2>
+<a id="api-reference" class="anchor" href="#api-reference" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>API Reference</h2>
+
+<p><a name="promisifyCall"></a></p>
+
+<h3>
+<a id="promisifycallctx-fn-args--undefined----promise" class="anchor" href="#promisifycallctx-fn-args--undefined----promise" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>promisifyCall(ctx, fn, ...args) ⇒ <code>undefined</code> | <code>*</code> | <code>Promise</code>
+</h3>
+
+<p>Promisifies the call to <code>fn</code> if appropriate given the arguments.
+Calls the function <code>fn</code> either using callback style if last argument is a function.
+If last argument is not a function, <code>fn</code> is called returning a promise.
+This lets you create API that can be called in either fashions.</p>
+
+<p><strong>Kind</strong>: global function<br>
+<strong>Returns</strong>: <code>undefined</code> | <code>*</code> | <code>Promise</code> - Promise if promisified  </p>
+
+<table>
+<thead>
+<tr>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ctx</td>
+<td><code>Object</code></td>
+<td>context / this</td>
+</tr>
+<tr>
+<td>fn</td>
+<td><code>function</code></td>
+<td>The function to call</td>
+</tr>
+<tr>
+<td>...args</td>
+<td><code>arguments</code></td>
+<td>Arguments</td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p>Copyright 2015 Bojan D.</p>
+
+<p>Licensed under the MIT License.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/bojand">bojand</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
