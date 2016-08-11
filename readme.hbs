@@ -1,0 +1,40 @@
+# promisify-call
+
+Promisify a function call so users can call a function with a callback or get a promise.
+
+## Installation
+
+`npm install promisify-call`
+
+## Usage
+
+```js
+function _uppercase(param, fn) {
+  setTimeout(() => {
+    return fn(null, param.toUpperCase());
+  }, 50);
+}
+
+function uppercase(param, fn) {
+  return promisifyCall(this, _uppercase, ...arguments);
+}
+
+// now we can call it using callback-style
+uppercase('foo', (err, res) => {
+  console.log(res); // FOO
+});
+
+// OR promise style
+const res = await uppercase('foo');
+console.log(res); // FOO
+```
+
+## API Reference
+
+{{>all-docs~}}
+
+## License
+
+Copyright 2015 Bojan D.
+
+Licensed under the MIT License.
