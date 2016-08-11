@@ -23,7 +23,7 @@ test.cb('should properly return success value - callback', t => {
   });
 });
 
-test.cb('should properly return errpr value - callback', t => {
+test.cb('should properly return error value - callback', t => {
   uppercase('error', (err, res) => {
     t.truthy(err);
     t.falsy(res);
@@ -38,7 +38,7 @@ test.cb('should properly return success value - promised using then()', t => {
   });
 });
 
-test.cb('should properly return errpr value - promised using then()', t => {
+test.cb('should properly return error value - promised using then()', t => {
   uppercase('error').then(res => {
     t.falsy(res);
   }).catch(err => {
@@ -53,6 +53,6 @@ test('should properly return success value - promised', async t => {
   t.is(res, 'FOO');
 });
 
-test('should properly return errpr value - promised', t => {
+test('should properly return error value - promised', async t => {
   t.throws(uppercase('error'));
 });
