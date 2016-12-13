@@ -1,58 +1,58 @@
-import test from 'ava';
+import test from 'ava'
 
-import promisifyCall from '../';
+const promisifyCall = require('../')
 
-function testFn(param, fn) {
+function testFn (param, fn) {
   setTimeout(() => {
     if (param.toLowerCase() === 'error') {
-      return fn(new Error(param));
+      return fn(new Error(param))
     }
-    return fn(null, param.toUpperCase());
-  }, 50);
+    return fn(null, param.toUpperCase())
+  }, 50)
 }
 
-function uppercase(param, fn) {
-  return promisifyCall(this, testFn, ...arguments);
+function uppercase (param, fn) {
+  return promisifyCall(this, testFn, ...arguments)
 }
 
 test.cb('should properly return success value - callback', t => {
   uppercase('foo', (err, res) => {
-    t.ifError(err);
-    t.is(res, 'FOO');
-    t.end();
-  });
-});
+    t.ifError(err)
+    t.is(res, 'FOO')
+    t.end()
+  })
+})
 
 test.cb('should properly return error value - callback', t => {
   uppercase('error', (err, res) => {
-    t.truthy(err);
-    t.falsy(res);
-    t.end();
-  });
-});
+    t.truthy(err)
+    t.falsy(res)
+    t.end()
+  })
+})
 
 test.cb('should properly return success value - promised using then()', t => {
   uppercase('foo').then(res => {
-    t.is(res, 'FOO');
-    t.end();
-  });
-});
+    t.is(res, 'FOO')
+    t.end()
+  })
+})
 
 test.cb('should properly return error value - promised using then()', t => {
   uppercase('error').then(res => {
-    t.falsy(res);
+    t.falsy(res)
   }).catch(err => {
-    t.truthy(err);
-    t.end();
-  });
-});
+    t.truthy(err)
+    t.end()
+  })
+})
 
 test('should properly return success value - promised', async t => {
-  t.plan(1);
-  const res = await uppercase('foo');
-  t.is(res, 'FOO');
-});
+  t.plan(1)
+  const res = await uppercase('foo')
+  t.is(res, 'FOO')
+})
 
 test('should properly return error value - promised', async t => {
-  t.throws(uppercase('error'));
-});
+  t.throws(uppercase('error'))
+})

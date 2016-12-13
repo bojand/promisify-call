@@ -17,6 +17,3 @@ jspm_packages
 *.orig
 .idea
 .DS_Store
-
-# babel output
-index.js

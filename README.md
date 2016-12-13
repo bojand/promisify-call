@@ -1,6 +1,8 @@
 # promisify-call
 
 Promisify a function call so users can call a function with a callback or get a promise.
+* **2.0** works only with native `Promise` so requires Node >= 4.0.
+* **1.0** uses [Bluebird](www.bluebirdjs.com) and should work with older Node.js
 
 ## Installation
 

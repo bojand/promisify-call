@@ -1,4 +1,4 @@
-import Promise from 'bluebird';
+const wc = require('with-callback')
 
 /**
  * Promisifies the call to <code>fn</code> if appropriate given the arguments.
@@ -10,19 +10,19 @@ import Promise from 'bluebird';
  * @param  {arguments}   args Arguments
  * @return {undefined|*|Promise}  Promise if promisified
  */
-function promisifyCall(ctx, fn, ...args) {
-  const lastIndex = args.length - 1;
-  const lastArg = args && args.length > 0 ? args[lastIndex] : null;
-  const cb = typeof lastArg === 'function' ? lastArg : null;
+function promisifyCall (ctx, fn, ...args) {
+  const lastIndex = args.length - 1
+  const lastArg = args && args.length > 0 ? args[lastIndex] : null
+  const cb = typeof lastArg === 'function' ? lastArg : null
 
   if (cb) {
-    return fn.apply(ctx, args);
+    return fn.apply(ctx, args)
   }
 
-  return Promise.fromCallback(callback => {
-    args.push(callback);
-    fn.apply(ctx, args);
-  });
+  return wc(callback => {
+    args.push(callback)
+    fn.apply(ctx, args)
+  })
 }
 
-module.exports = promisifyCall;
+module.exports = promisifyCall
