@@ -1,6 +1,6 @@
 {
   "name": "promisify-call",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "description": "Promisify a function call so users can call a function with a callback or get a promise",
   "main": "index.js",
   "scripts": {
