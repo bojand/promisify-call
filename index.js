@@ -11,7 +11,10 @@ const wc = require('with-callback')
  * @return {undefined|*|Promise}  Promise if promisified
  */
 function promisifyCall (ctx, fn, ...args) {
-  const lastIndex = args.length - 1
+  // check if last (callback) argument is being pased in explicitly
+  // as it might be undefined or null, in which case we'll replace it
+  const same = fn.length && args.length === fn.length
+  const lastIndex = same ? fn.length - 1 : args.length - 1
   const lastArg = args && args.length > 0 ? args[lastIndex] : null
   const cb = typeof lastArg === 'function' ? lastArg : null
 
@@ -20,7 +23,9 @@ function promisifyCall (ctx, fn, ...args) {
   }
 
   return wc(callback => {
-    args.push(callback)
+    same
+      ? args[lastIndex] = callback
+      : args.push(callback)
     fn.apply(ctx, args)
   })
 }
