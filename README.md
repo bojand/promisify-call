@@ -4,7 +4,7 @@
 [![build status](https://img.shields.io/travis/bojand/promisify-call/master.svg?style=flat-square)](https://travis-ci.org/bojand/promisify-call)
 
 Promisify a function call so users can call a function with a callback or get a promise.
-* **2.0** works only with native `Promise` so requires Node >= 4.0.
+* **2.0** works only with native `Promise` so requires Node >= 6.9.
 * **1.0** uses [Bluebird](www.bluebirdjs.com) and should work with older Node.js
 
 ## Installation
