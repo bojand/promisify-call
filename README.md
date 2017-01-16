@@ -4,7 +4,7 @@
 [![build status](https://img.shields.io/travis/bojand/promisify-call/master.svg?style=flat-square)](https://travis-ci.org/bojand/promisify-call)
 
 Promisify a function call so users can call a function with a callback or get a promise.
-* **2.0** works only with native `Promise` so requires Node >= 6.9.
+* **2.0** works only with native `Promise` so requires Node >= 4.0.
 * **1.0** uses [Bluebird](www.bluebirdjs.com) and should work with older Node.js
 
 ## Installation
@@ -38,7 +38,7 @@ console.log(res); // FOO
 
 <a name="promisifyCall"></a>
 
-### promisifyCall(ctx, fn, ...args) ⇒ <code>undefined</code> &#124; <code>\*</code> &#124; <code>Promise</code>
+### promisifyCall(ctx, fn, args) ⇒ <code>undefined</code> &#124; <code>\*</code> &#124; <code>Promise</code>
 Promisifies the call to <code>fn</code> if appropriate given the arguments.
 Calls the function <code>fn</code> either using callback style if last argument is a function.
 If last argument is not a function, <code>fn</code> is called returning a promise.
@@ -51,7 +51,7 @@ This lets you create API that can be called in either fashions.
 | --- | --- | --- |
 | ctx | <code>Object</code> | context / this |
 | fn | <code>function</code> | The function to call |
-| ...args | <code>arguments</code> | Arguments |
+| args | <code>arguments</code> | Arguments |
 
 ## License
 

@@ -13,7 +13,7 @@ const wc = require('with-callback')
 function promisifyCall (ctx, fn) {
   const args = []
   args.push.apply(args, arguments)
-  args.splice(0,2)
+  args.splice(0, 2)
   // check if last (callback) argument is being pased in explicitly
   // as it might be undefined or null, in which case we'll replace it
   const same = fn.length && args.length === fn.length
